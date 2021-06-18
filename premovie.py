@@ -8,5 +8,12 @@ page = urlopen(url)
 soup = BeautifulSoup(page, 'lxml')
 
 title = soup.find_all("dl",class_="lst_dsc")
+titleList = []
 for i in title:
     print(i.find("a").text)
+    titleList.append(i.find("a").text)
+
+data = {"title": titleList}
+data = pd.DataFrame(data)
+data.to_csv("premovie_title.csv",index=False)
+print(data)
